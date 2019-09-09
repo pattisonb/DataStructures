@@ -19,18 +19,16 @@ int main(int argc, char** argv)
 }
 
 void createTeams(ifstream t1_data, ifstream t2_data) {
-    char* teamName = new char[40];
-    DSString team1Name;
+    string name;
+    getline(t1_data, name); //getting the team name into buffer string
+    DSString team1Name(name);
     int team1Size;
-    team1Name = teamName;
-    getline(&teamName, t1_data, ' ');
     t1_data >> team1Size;
     Team team1 = *new Team(team1Size, team1Name);
 
-    DSString team2Name;
+    getline(t2_data, name); //getting the team name into buffers
+    DSString team2Name(name);
     int team2Size;
-    t2_data >> teamName;
-    team2Name = teamName;
     t2_data >> team2Size;
     Team team2 = *new Team(team2Size, team2Name);
 }

@@ -14,6 +14,7 @@ private:
 public:
 	DSString();
 	DSString(const char*);
+    DSString(const string);
 	DSString(const DSString&);
 	~DSString();
 

@@ -12,9 +12,14 @@ DSString::DSString(const char* d){
     strcpy(data, d);
 }
 
+DSString::DSString(const string d) {
+    data = new char[d.size() + 1];
+    strcpy(data, d.c_str()); //adding .c_str allows use of string copy here
+}
+
 DSString::DSString(const DSString& d){
     data = new char[(strlen(d.data)) + 1];
-    strcpy(data, d.data);
+    strcpy(data, d.data); //make sure to use .data when using string functions with DSString
 }
 
 DSString::~DSString(){
