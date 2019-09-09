@@ -5,13 +5,11 @@ CONFIG -= qt
 
 SOURCES += \
         dsstring.cpp \
-        gameroom.cpp \
         main.cpp \
         player.cpp \
         team.cpp
 
 HEADERS += \
     dsstring.h \
-    gameroom.h \
     player.h \
     team.h
