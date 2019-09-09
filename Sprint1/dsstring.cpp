@@ -1,4 +1,7 @@
 #include "dsstring.h"
+#include <iostream>
+
+using namespace std;
 
 DSString::DSString() {
     data = nullptr;
@@ -11,7 +14,7 @@ DSString::DSString(const char* d){
 
 DSString::DSString(const DSString& d){
     data = new char[(strlen(d.data)) + 1];
-    strcpy(data, d);
+    strcpy(data, d.data);
 }
 
 DSString::~DSString(){
@@ -38,7 +41,7 @@ DSString DSString::operator+ (const DSString& p){
     char* temp = this->data;
     this->data = new char[strlen(p.data) + 1];
     strcat(data, temp);
-    strcat(data, p);
+    strcat(data, p.data);
     delete [] temp;
     return data;
 }
@@ -62,7 +65,7 @@ bool DSString::operator==(const char * p) {
 }
 
 bool DSString::operator==(const DSString & p) {
-    if (strcmp(data, p) == 0) {
+    if (strcmp(data, p.data) == 0) {
         return true;
     }
        return false;
@@ -76,7 +79,7 @@ bool DSString::operator<(const char * p) {
 }
 
 bool DSString::operator<(const DSString & p) {
-    if (strcmp(data, p) < 0) {
+    if (strcmp(data, p.data) < 0) {
         return true;
     }
        return false;
