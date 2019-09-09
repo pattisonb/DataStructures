@@ -65,7 +65,6 @@ bool DSString::operator==(const DSString & p) {
     if (strcmp(data, p) == 0) {
         return true;
     }
-    else
        return false;
 }
 
@@ -73,7 +72,6 @@ bool DSString::operator<(const char * p) {
     if (strcmp(data, p) < 0) {
         return true;
     }
-    else
        return false;
 }
 
@@ -81,7 +79,6 @@ bool DSString::operator<(const DSString & p) {
     if (strcmp(data, p) < 0) {
         return true;
     }
-    else
        return false;
 }
 
