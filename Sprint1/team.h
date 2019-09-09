@@ -11,7 +11,7 @@ private:
     int m_size;
     DSString m_name;
     int m_points;
-    player [];
+    //player [];
 
 public:
     Team();
