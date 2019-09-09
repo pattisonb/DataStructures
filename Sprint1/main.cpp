@@ -23,6 +23,7 @@ void createTeams(ifstream t1_data, ifstream t2_data) {
     DSString team1Name;
     int team1Size;
     team1Name = teamName;
+    getline(&teamName, t1_data, ' ');
     t1_data >> team1Size;
     Team team1 = *new Team(team1Size, team1Name);
 
