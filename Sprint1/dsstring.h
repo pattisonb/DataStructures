@@ -30,6 +30,10 @@ public:
 
 	int size();
 
+    /*substring; paramter a represents where you start
+     * b is the number of characters to copy into the substring
+     * if b is positive count forward from position a, if negaive, count backwards
+     */
 	DSString substring(int a, int b);
 	
 	char* c_str();

@@ -73,7 +73,7 @@ bool DSString::operator==(const DSString & p) {
     if (strcmp(data, p.data) == 0) {
         return true;
     }
-       return false;
+       return false; //fucntion reaches end without returning if the else block in included
 }
 
 bool DSString::operator<(const char * p) {
@@ -99,5 +99,20 @@ int DSString::size() {
 }
 
 DSString DSString::substring(int a, int b) {
-
+    DSString returnString;
+    char* temp = nullptr;
+    if (b >=0) { //copying forwards
+        temp[0] = this->data[a-1]; //setting first character in temp to the value of the DSString at a
+        strncpy(returnString.data, temp, b+1);
+        temp[b+1] = '\0'; //setting the null ptr at the end
+        return returnString;
+    }
+    else {
+        int start = (a-1) + b;
+        temp[0] = this->data[start]; //setting first character in temp to the desired letter
+        strncpy(returnString.data, temp, a+1);
+        temp[a+1] = '\0'; //setting the null ptr at the end
+        return returnString;
+    }
 }
+
