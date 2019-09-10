@@ -27,12 +27,13 @@ Team* createTeam(ifstream& teamData) {
     DSString teamName(buffer);
     int teamSize;
     teamData >> teamSize;
-    Team team1 = *new Team(teamSize, teamName);
+    Team* team = new Team(teamSize, teamName);
     int idNum;
     for (int i = 0; i < teamSize; i++) {
         teamData >> idNum;
         teamData >> buffer;
         DSString name(buffer);
-        team1.addPlayer(name, idNum);
+        team->addPlayer(name, idNum);
     }
+    return team;
 }
