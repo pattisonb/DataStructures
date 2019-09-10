@@ -1,6 +1,10 @@
 #include "player.h"
 
-player::player(){}
+player::player(){
+    m_name = "";
+    m_idNum = 0;
+}
+
 
 player::player(DSString n, int i) {
     m_name = n;

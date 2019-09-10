@@ -16,3 +16,7 @@ int Team::getNumPlayers() {
 int Team::getPoints() {
     return m_points;
 }
+
+void Team::addPlayer(DSString playerName, int idNum) {
+    players[numPlayersCreated] = player(playerName, idNum);
+}
