@@ -35,10 +35,8 @@ DSString & DSString::operator= (const char* p) {
 }
 
 DSString & DSString::operator= (const DSString& p) {
-    char* temp = this->data;
     this->data = new char[strlen(p.data) + 1];
     strcpy(this->data, p.data);
-    delete[] temp;
     return *this;
 }
 

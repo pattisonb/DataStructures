@@ -1,8 +1,17 @@
 #include "team.h"
 
+Team::Team() {
+    players = nullptr;
+}
+
 Team::Team(int a, DSString b){
     m_size = a;
     m_name = b;
+    players = new player[a];
+}
+
+Team::~Team() {
+    delete [] players;
 }
 
 DSString Team::getName() {

@@ -17,6 +17,7 @@ private:
 public:
     Team();
     Team(int, DSString);
+    ~Team();
     DSString getName();
     int getNumPlayers();
     int getPoints();
