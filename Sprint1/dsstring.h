@@ -38,8 +38,10 @@ public:
 	
 	char* c_str();
 
-	friend ostream& operator<< (
-        ostream&, const string&);
+    friend ostream& operator<< (std::ostream& stream, const DSString& string) {
+        stream << string.data;
+        return stream;
+    }
 
 };
 
