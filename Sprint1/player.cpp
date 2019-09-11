@@ -22,3 +22,12 @@ DSString player::getName() {
 int player::getPoints() {
     return m_points;
 }
+
+int player::getTags() {
+    return tags;
+}
+
+void player::addTag(int a) {
+    tags++;
+    m_points += a;
+}

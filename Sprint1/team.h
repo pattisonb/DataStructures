@@ -23,6 +23,7 @@ public:
     void addPoints(int);
     player * players;
     void addPlayer(DSString playerName, int idNum);
+    void sort();
 };
 
 #endif // TEAM_H
