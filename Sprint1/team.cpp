@@ -35,23 +35,36 @@ void Team::addPlayer(DSString playerName, int idNum) {
     numPlayersCreated++;
 }
 
-void Team::sort() {
-    int counter; //using two counters for the two loops
-    int counter1;
-    int smallest;
-    player temp;
-
-    for (counter = 0; counter < m_size - 1; ++counter) {
-        smallest = counter; //treat the newest player as the last in tag order and then check it
-        for (counter1 = counter+1; counter1 < m_size; ++counter1) {
-            if (players[counter1].getTags() < players[smallest].getTags()) {
-                smallest = counter1;
+void Team::sort() { //sorts by number of tags than by alph
+    for (int i = 0; i < m_size - 1; i++) {
+        int highScore = i;
+        for (int x = i + 1; x < m_size; x++) {
+            if (players[x].getTags() > players[i].getTags()) {
+                highScore = x;
+            }
+            if (players[x].getTags() == players[i].getTags()) {
+                if (players[i].getName() < players[x].getName()) {
+                    highScore = x;
+                }
             }
         }
+        swap(players[i], players[highScore]);
     }
-    //swap
-    temp = players[counter];
-    players[counter] = players[smallest];
-    players[smallest] = temp;
+}
 
+void Team::highScore() { // using because player with highest tags may not have highest score
+    for (int i = 0; i < m_size - 1; i++) {
+        int highScore = i;
+        for (int x = i + 1; x < m_size; x++) {
+            if (players[x].getPoints() > players[i].getPoints()) {
+                highScore = x;
+            }
+            if (players[x].getTags() == players[i].getTags()) {
+                if (players[i].getName() < players[x].getName()) {
+                    highScore = x;
+                }
+            }
+        }
+        swap(players[i], players[highScore]);
+    }
 }

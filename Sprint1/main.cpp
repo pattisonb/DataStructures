@@ -22,7 +22,12 @@ int main(int argc, char** argv)
 
     Team team1 = createTeam(team1Data);
     Team team2 = createTeam(team2Data);
-    medVerbPrint(team1, team2, matchData, outputFile);
+    if (strcmp(verbosity,"vlow") == 0) {
+        lowVerbPrint(team1, team2, matchData, outputFile);
+    }
+    if (strcmp(verbosity,"vmed") == 0) {
+        medVerbPrint(team1, team2, matchData, outputFile);
+    }
 }
 
 Team createTeam(ifstream& teamData) {
@@ -136,6 +141,8 @@ void medVerbPrint(Team team1, Team team2, ifstream& data, ofstream& output) {
             }
         }
     }
+    team1.sort(); //sorting the teams by tags
+    team2.sort();
     output << team1.getName() << endl;
     for (int i = 0; i < team1.getNumPlayers(); i++) {
         output << "\t" << team1.players[i].getName() << " had a total of "
@@ -146,6 +153,12 @@ void medVerbPrint(Team team1, Team team2, ifstream& data, ofstream& output) {
         output << "\t" << team2.players[i].getName() << " had a total of "
                << team2.players[i].getTags() << " tags\n" << endl;
     }
+    team1.highScore(); //putting the player with the highest score into players[0]
+    team2.highScore();
+    output << "Best score from " << team1.getName() << ":" << team1.players[0].getName()
+           << " (" << team1.players[0].getPoints() << " points)" << endl;
+    output << "Best score from " << team2.getName() << ":" << team2.players[0].getName()
+           << " (" << team2.players[0].getPoints() << " points)" << endl;
     output << team1.getName() << ": " << team1.getPoints() << " points" << endl;
     output << team2.getName() << ": " << team2.getPoints() << " points" << endl;
     if (team1.getPoints() > team2.getPoints()) {

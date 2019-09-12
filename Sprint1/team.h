@@ -24,6 +24,7 @@ public:
     player * players;
     void addPlayer(DSString playerName, int idNum);
     void sort();
+    void highScore();
 };
 
 #endif // TEAM_H

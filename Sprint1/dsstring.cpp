@@ -23,7 +23,7 @@ DSString::DSString(const DSString& d){
 }
 
 DSString::~DSString(){
-    delete data;
+    delete [] data;
 }
 
 DSString & DSString::operator= (const char* p) {
