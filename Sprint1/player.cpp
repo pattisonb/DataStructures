@@ -5,6 +5,9 @@ player::player(){
     m_idNum = 0;
 }
 
+player::~player(){
+
+}
 
 player::player(DSString n, int i) {
     m_name = n;

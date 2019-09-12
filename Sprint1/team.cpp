@@ -11,7 +11,8 @@ Team::Team(int a, DSString b){
 }
 
 Team::~Team() {
-    delete [] players;
+    //if (players != nullptr)
+        //delete [] players;
 }
 
 DSString Team::getName() {
@@ -59,7 +60,7 @@ void Team::highScore() { // using because player with highest tags may not have 
             if (players[x].getPoints() > players[i].getPoints()) {
                 highScore = x;
             }
-            if (players[x].getTags() == players[i].getTags()) {
+            if (players[x].getPoints() == players[i].getPoints()) {
                 if (players[i].getName() < players[x].getName()) {
                     highScore = x;
                 }

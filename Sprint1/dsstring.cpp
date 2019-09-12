@@ -23,18 +23,24 @@ DSString::DSString(const DSString& d){
 }
 
 DSString::~DSString(){
-    delete [] data;
+    if (data != nullptr){
+        delete [] data;
+    }
 }
 
 DSString & DSString::operator= (const char* p) {
-    char* temp = this->data;
+    if (data != nullptr){
+        delete [] data;
+    }
     this->data = new char[strlen(p) + 1];
     strcpy(this->data, p);
-    delete[] temp;
     return *this;
 }
 
 DSString & DSString::operator= (const DSString& p) {
+    if (data != nullptr){
+        delete [] data;
+    }
     this->data = new char[strlen(p.data) + 1];
     strcpy(this->data, p.data);
     return *this;

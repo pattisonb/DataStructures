@@ -15,6 +15,7 @@ private:
 public:
     player();
     player(DSString, int);
+    ~player();
     DSString getName();
     int getID();
     int getPoints();

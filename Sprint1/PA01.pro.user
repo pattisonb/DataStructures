@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.9.2, 2019-09-11T19:02:43. -->
+<!-- Written by QtCreator 4.9.2, 2019-09-12T14:05:05. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -306,7 +306,7 @@
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">PA01</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/home/student/Desktop/CSE2341-F19-Brian-Pattison/Sprint1/PA01.pro</value>
-    <value type="QString" key="RunConfiguration.Arguments">cowboys.txt sharks.txt match.txt output.txt vlow</value>
+    <value type="QString" key="RunConfiguration.Arguments">cowboys.txt sharks.txt match.txt output.txt vmed</value>
     <value type="uint" key="RunConfiguration.QmlDebugServerPort">3768</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>

@@ -13,12 +13,12 @@ private:
 	char* data;
 public:
 	DSString();
-	DSString(const char*);
+    DSString(const char*);
     DSString(const string);
 	DSString(const DSString&);
 	~DSString();
 
-	DSString& operator= (const char*);
+    DSString& operator= (const char*);
 	DSString& operator= (const DSString&);
     DSString operator+ (const DSString&);
 	DSString& operator += (const DSString&);
