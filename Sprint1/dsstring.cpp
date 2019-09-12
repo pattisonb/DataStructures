@@ -114,3 +114,7 @@ DSString DSString::substring(int a, int b) {
     }
 }
 
+char* DSString::c_str() {
+    return data;
+}
+
