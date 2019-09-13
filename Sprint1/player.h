@@ -20,6 +20,7 @@ public:
     int getID();
     int getPoints();
     int getTags();
+    void setTags(int a);
     void addTag(int);
 };
 

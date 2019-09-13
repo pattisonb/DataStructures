@@ -11,9 +11,9 @@ using namespace std;
 Team createTeam(ifstream& teamData);
 void lowVerbPrint(Team team1, Team team2, ifstream& data, ofstream& output);
 void medVerbPrint(Team team1, Team team2, ifstream& data, ofstream& output);
-void highVerbPrint(Team team1, Team team2, ifstream& data, ifstream& data1, ofstream& output); //has to have two datas
+void highVerbPrint(Team team1, Team team2, ifstream& data, ofstream& output); //has to have two datas
 //so that it can read the match files twice
-void getTags(player, ifstream&data);
+void getTags(player, Team, ifstream&data, ostream&);
 
 int main(int argc, char** argv)
 {
@@ -22,9 +22,6 @@ int main(int argc, char** argv)
     ifstream matchData(argv[3]);
     ofstream outputFile(argv[4]);
     char* verbosity = argv[5];
-
-    DSString string = "Hello World";
-    cout << string.substring(7, -3) << endl;
 
     Team team1 = createTeam(team1Data);
     Team team2 = createTeam(team2Data);
@@ -35,7 +32,7 @@ int main(int argc, char** argv)
         medVerbPrint(team1, team2, matchData, outputFile);
     }
     if (strcmp(verbosity,"vhigh") == 0) {
-        highVerbPrint(team1, team2, matchData, matchData, outputFile);
+        highVerbPrint(team1, team2, matchData, outputFile);
     }
 }
 
@@ -199,7 +196,7 @@ void medVerbPrint(Team team1, Team team2, ifstream& data, ofstream& output) {
     }
 }
 
-void highVerbPrint(Team team1, Team team2, ifstream& data1, ifstream& data2, ofstream& output) {
+void highVerbPrint(Team team1, Team team2, ifstream& data1, ofstream& output) {
     int numTags;
     int taggerID;
     int taggedID;
@@ -237,20 +234,19 @@ void highVerbPrint(Team team1, Team team2, ifstream& data1, ifstream& data2, ofs
             }
         }
     }
+    team1.sort();
+    team2.sort();
+    data1.clear();
+    data1.seekg(0, ios::beg); //going back to the beginning of the file
     output << team1.getName() << endl;
     for (int i = 0; i < team1.getNumPlayers(); i++) {
-        for (int j = 0; j < team2.getNumPlayers(); j++) {
-            output << "\t" << team1.players[i].getName() << " tagged" << team2.players[j].getName() << " " <<
-                      team1.players[i].getTags() << " times" << endl;
-        }
+        getTags(team1.players[i], team2, data1, output);
     }
+
     output << team1.getName() << ": " << team1.getPoints() << " points\n" << endl;
     output << team2.getName() << endl;
-    for (int i = 0; i < team2.getNumPlayers(); i++) {
-        for (int j = 0; j < team2.getNumPlayers(); j++) {
-            output << "\t" << team2.players[i].getName() << " tagged" << team1.players[j].getName() << " " <<
-                      team2.players[i].getTags() << " times" << endl;
-        }
+    for (int i = 0; i < team1.getNumPlayers(); i++) {
+        getTags(team2.players[i], team1, data1, output);
     }
     output << team2.getName() << ": " << team2.getPoints() << " points\n" << endl;
     if (team1.getPoints() > team2.getPoints()) {
@@ -262,6 +258,48 @@ void highVerbPrint(Team team1, Team team2, ifstream& data1, ifstream& data2, ofs
     if (team1.getPoints() == team2.getPoints()) {
         output << "There was a ties" << endl;
     }
+}
+
+void getTags(player p, Team teamb, ifstream&data, ostream&output) { //player comes come from one team and the team is the other
+    int numTags = 0;
+    int totalTags = 0;
+    int tagger;
+    int tagged;
+    int tags [100];
+    int time;
+    int shotPlace;
+    int counter = 0;
+    data >> numTags;
+    for (int i = 0; i < numTags; i++) {
+        data >> tagger;
+        data >> tagged;
+        data >> time;
+        data >> shotPlace;
+        if (p.getID() == tagger) {
+            tags[i] = tagged;
+            counter++;
+        }
+    }
+        for (int j = 0; j < teamb.getNumPlayers(); j++) {
+            for (int i = 0; i < numTags; i++) {
+            if (teamb.players[j].getID() == tags[i]) {
+                teamb.players[j].addTag(1);
+                }
+            }
+        }
+        teamb.sort();
+        for (int j = 0; j < teamb.getNumPlayers(); j++) {
+            output << "\t" << p.getName() << " tagged" << teamb.players[j].getName() << " " <<
+                      teamb.players[j].getTags() << " times" << endl;
+            totalTags += teamb.players[j].getTags();
+
+        }
+        output << "\t" << p.getName() << " had a total of " << totalTags << " tags" << endl;
+        data.clear();
+        data.seekg(0, ios::beg); //going to beginning of the file
+        for (int j = 0; j < teamb.getNumPlayers(); j++) {
+            teamb.players[j].setTags(0);
+        }
 }
 
 

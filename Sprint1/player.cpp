@@ -34,3 +34,7 @@ void player::addTag(int a) {
     tags++;
     m_points += a;
 }
+
+void player::setTags(int a) {
+    tags = a;
+}
