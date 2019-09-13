@@ -67,7 +67,7 @@ void lowVerbPrint(Team team1, Team team2, ifstream& data, ofstream& output) {
     int tagPoints = 0;
     data >> numTags;
     for (int i = 0; i < numTags; i++) {
-        data >> taggerID;
+        data >> taggerID; //reading player info
         data >> taggedID;
         data >> timeTag;
         data >> tagSpot;
