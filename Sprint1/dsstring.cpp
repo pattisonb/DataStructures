@@ -18,10 +18,8 @@ DSString::DSString(const string d) {
 }
 
 DSString::DSString(const DSString& d){
-    int length = 0;
-    length = strlen(d.data);
-    data = new char[length + 1];
-    strcpy(data, d.data);
+    data = new char[(strlen(d.data)) + 1];
+    strcpy(data, d.data); //make sure to use .data when using string functions with DSString
 }
 
 DSString::~DSString(){
@@ -43,10 +41,8 @@ DSString & DSString::operator= (const DSString& p) {
     if (data != nullptr){
         delete [] data;
     }
-    int length = 0;
-    length = strlen(p.data);
-    data = new char [length + 1];
-    strncpy(data, p.data, length);
+    this->data = new char[strlen(p.data) + 1];
+    strcpy(this->data, p.data);
     return *this;
 }
 
