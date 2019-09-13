@@ -41,8 +41,9 @@ DSString & DSString::operator= (const DSString& p) {
     if (data != nullptr){
         delete [] data;
     }
-    this->data = new char[strlen(p.data) + 1];
-    strcpy(this->data, p.data);
+    int length = strlen(p.data);
+    data = new char [length + 1];
+    strcpy(data, p.data);
     return *this;
 }
 
