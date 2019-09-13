@@ -11,6 +11,9 @@ using namespace std;
 Team createTeam(ifstream& teamData);
 void lowVerbPrint(Team team1, Team team2, ifstream& data, ofstream& output);
 void medVerbPrint(Team team1, Team team2, ifstream& data, ofstream& output);
+void highVerbPrint(Team team1, Team team2, ifstream& data, ifstream& data1, ofstream& output); //has to have two datas
+//so that it can read the match files twice
+void getTags(player, ifstream&data);
 
 int main(int argc, char** argv)
 {
@@ -27,6 +30,9 @@ int main(int argc, char** argv)
     }
     if (strcmp(verbosity,"vmed") == 0) {
         medVerbPrint(team1, team2, matchData, outputFile);
+    }
+    if (strcmp(verbosity,"vhigh") == 0) {
+        highVerbPrint(team1, team2, matchData, matchData, outputFile);
     }
 }
 
@@ -145,11 +151,21 @@ void medVerbPrint(Team team1, Team team2, ifstream& data, ofstream& output) {
     team2.sort();
     output << team1.getName() << endl;
     for (int i = 0; i < team1.getNumPlayers(); i++) {
+        if (team1.players[i].getTags() == 1) {
+            output << "\t" << team1.players[i].getName() << " had a total of "
+                   << team1.players[i].getTags() << " tag\n" << endl;
+        }
+        else
         output << "\t" << team1.players[i].getName() << " had a total of "
                << team1.players[i].getTags() << " tags\n" << endl;
     }
     output << team2.getName() << endl;
     for (int i = 0; i < team2.getNumPlayers(); i++) {
+        if (team2.players[i].getTags() == 1) {
+            output << "\t" << team2.players[i].getName() << " had a total of "
+                   << team2.players[i].getTags() << " tag\n" << endl;
+        }
+        else
         output << "\t" << team2.players[i].getName() << " had a total of "
                << team2.players[i].getTags() << " tags\n" << endl;
     }
@@ -157,8 +173,16 @@ void medVerbPrint(Team team1, Team team2, ifstream& data, ofstream& output) {
     team2.highScore();
     output << "Best score from " << team1.getName() << ":" << team1.players[0].getName()
            << " (" << team1.players[0].getPoints() << " points)" << endl;
+    if (team1.players[0].getPoints() == team1.players[1].getPoints()) {
+        output << "Best score from " << team1.getName() << ":" << team1.players[1].getName()
+               << " (" << team1.players[1].getPoints() << " points)" << endl;
+    }
     output << "Best score from " << team2.getName() << ":" << team2.players[0].getName()
            << " (" << team2.players[0].getPoints() << " points)" << endl;
+    if (team2.players[0].getPoints() == team2.players[1].getPoints()) {
+        output << "Best score from " << team2.getName() << ":" << team2.players[1].getName()
+               << " (" << team2.players[1].getPoints() << " points)" << endl;
+    }
     output << team1.getName() << ": " << team1.getPoints() << " points" << endl;
     output << team2.getName() << ": " << team2.getPoints() << " points" << endl;
     if (team1.getPoints() > team2.getPoints()) {
@@ -171,3 +195,70 @@ void medVerbPrint(Team team1, Team team2, ifstream& data, ofstream& output) {
         output << "It's a tie." << endl;
     }
 }
+
+void highVerbPrint(Team team1, Team team2, ifstream& data1, ifstream& data2, ofstream& output) {
+    int numTags;
+    int taggerID;
+    int taggedID;
+    int timeTag;
+    int tagSpot;
+    int tagPoints = 0;
+    data1 >> numTags;
+    for (int i = 0; i < numTags; i++) {
+        data1 >> taggerID;
+        data1 >> taggedID;
+        data1 >> timeTag;
+        data1 >> tagSpot;
+        if (tagSpot == 1) {
+            tagPoints = 5;
+        }
+        else if (tagSpot == 2) {
+            tagPoints = 8;
+        }
+        else if (tagSpot == 3) {
+            tagPoints = 7;
+        }
+        else if (tagSpot == 4) {
+            tagPoints = 4;
+        }
+        for (int i = 0; i < team1.getNumPlayers(); i++) {
+            if (team1.players[i].getID() == taggerID) {
+                team1.players[i].addTag(1);
+                team1.addPoints(tagPoints);
+            }
+        }
+        for (int i = 0; i < team2.getNumPlayers(); i++) {
+            if (team2.players[i].getID() == taggerID) {
+                team2.players[i].addTag(1);
+                team2.addPoints(tagPoints);
+            }
+        }
+    }
+    output << team1.getName() << endl;
+    for (int i = 0; i < team1.getNumPlayers(); i++) {
+        for (int j = 0; j < team2.getNumPlayers(); j++) {
+            output << "\t" << team1.players[i].getName() << " tagged" << team2.players[j].getName() << " " <<
+                      team1.players[i].getTags() << " times" << endl;
+        }
+    }
+    output << team1.getName() << ": " << team1.getPoints() << " points\n" << endl;
+    output << team2.getName() << endl;
+    for (int i = 0; i < team2.getNumPlayers(); i++) {
+        for (int j = 0; j < team2.getNumPlayers(); j++) {
+            output << "\t" << team2.players[i].getName() << " tagged" << team1.players[j].getName() << " " <<
+                      team2.players[i].getTags() << " times" << endl;
+        }
+    }
+    output << team2.getName() << ": " << team2.getPoints() << " points\n" << endl;
+    if (team1.getPoints() > team2.getPoints()) {
+        output << "Winners: " << team1.getName() << endl;
+    }
+    if (team1.getPoints() < team2.getPoints()) {
+        output << "Winners: " << team2.getName() << endl;
+    }
+    if (team1.getPoints() == team2.getPoints()) {
+        output << "There was a ties" << endl;
+    }
+}
+
+
