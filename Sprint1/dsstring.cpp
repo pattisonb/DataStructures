@@ -104,20 +104,23 @@ int DSString::size() {
 
 DSString DSString::substring(int a, int b) {
     DSString returnString;
-    char* temp = nullptr;
-    if (b >=0) { //copying forwards
-        temp[0] = this->data[a-1]; //setting first character in temp to the value of the DSString at a
-        strncpy(returnString.data, temp, b+1);
-        temp[b+1] = '\0'; //setting the null ptr at the end
-        return returnString;
+    char * temp = new char[strlen(this->data) + 1];
+    int start = 0;
+    if (b >= 0) {
+        for (int i = a - 1; i < b; i++) {
+            temp[start] = this->data[i];
+            start++;
+        }
+        returnString.data = temp;
     }
-    else {
-        int start = (a-1) + b;
-        temp[0] = this->data[start]; //setting first character in temp to the desired letter
-        strncpy(returnString.data, temp, a+1);
-        temp[a+1] = '\0'; //setting the null ptr at the end
-        return returnString;
+    if (b < 0) {
+        for (int i = (-1 * b); i <= a; i++) {
+            temp[start] = this->data[i];
+            start++;
+        }
+        returnString.data = temp;
     }
+    return returnString;
 }
 
 char* DSString::c_str() {

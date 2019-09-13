@@ -23,6 +23,9 @@ int main(int argc, char** argv)
     ofstream outputFile(argv[4]);
     char* verbosity = argv[5];
 
+    DSString string = "Hello World";
+    cout << string.substring(7, -3) << endl;
+
     Team team1 = createTeam(team1Data);
     Team team2 = createTeam(team2Data);
     if (strcmp(verbosity,"vlow") == 0) {
