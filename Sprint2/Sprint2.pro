@@ -15,7 +15,15 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-        main.cpp
+        ../../../Desktop/CSE2341-F19-Brian-Pattison/Sprint2/main.cpp \
+        dsstring.cpp \
+        dsvectortest.cpp \
+        main.cpp \
+        tweet.cpp
+        catch.hpp
+        dsstring.cpp
+        desvectortest.cpp
+        tweet.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -23,4 +31,12 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    dsvector.h
+    ../../../Desktop/CSE2341-F19-Brian-Pattison/Sprint2/dsvector.h \
+    catch.hpp \
+    catch2.h \
+    dsstring.h \
+    dsvector.h \
+    tweet.h
+    catch2.h
+    dsstring.h
+    tweet.h
