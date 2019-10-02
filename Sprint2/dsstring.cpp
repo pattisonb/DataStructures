@@ -94,6 +94,13 @@ bool DSString::operator<(const DSString & p)const {
        return false;
 }
 
+bool DSString::operator>(const DSString & p)const {
+    if (strcmp(data, p.data) > 0) {
+        return true;
+    }
+       return false;
+}
+
 char& DSString::operator[] (const int b) {
     return this->data[b];
 }

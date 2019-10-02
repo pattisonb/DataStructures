@@ -15,9 +15,11 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+        classifier.cpp \
         dsstring.cpp \
         dsvectortest.cpp \
         main.cpp \
+        porter2_stemmer.cpp \
         tweet.cpp
         catch.hpp
         dsstring.cpp
@@ -33,8 +35,12 @@ HEADERS += \
     ../../../Desktop/CSE2341-F19-Brian-Pattison/Sprint2/dsvector.h \
     ../../../Downloads/catch.hpp \
     catch.hpp \
+    classifier.h \
     dsstring.h \
     dsvector.h \
+    hash.h \
+    porter2_stemmer.h \
+    string_view.h \
     tweet.h
     dsstring.h
     tweet.h

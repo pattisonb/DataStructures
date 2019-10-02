@@ -1,13 +1,14 @@
 #include "tweet.h"
+#include "porter2_stemmer.h"
 
-tweet::tweet()
+Tweet::Tweet()
 {
     idNum = 0;
     rating = 0;
     contents = "";
 }
 
-tweet::tweet(int ID, int rate, DSString c) {
+Tweet::Tweet(int ID, int rate, DSString c) {
     if (ID <= 0) {
         ID *= -1;
     }
@@ -17,28 +18,42 @@ tweet::tweet(int ID, int rate, DSString c) {
     createWords();
 }
 
-tweet::~tweet() {
+Tweet::~Tweet() {
 
 }
 
-int tweet::getID() {
+int Tweet::getID() {
     return idNum;
 }
 
-int tweet::getRating() {
+int Tweet::getRating() {
     return rating;
 }
 
-void tweet::createWords() { //separates tweet into a vector of individual words
+void Tweet::createWords() { //separates tweet into a vector of individual words
     char* token = strtok(contents.c_str(), " ");
     while (token != NULL) {
-        DSString temp(token);
-        words.push_back(temp);
+        if (token[0] != '@') {
+            for (int i = 0; token[i]; i++) {
+                if (!isalpha(token[i])) {
+                    for (int j = i; token[j]; j++) {
+                        token[j] = token[j + 1];
+                    }
+                }
+                token[i] = tolower(token[i]);
+            }
+            string toStem = token;
+            Porter2Stemmer::stem(toStem);
+            DSString temp(toStem);
+            if (temp.size() != 0 && token[0] != '@') {
+                words.push_back(temp);
+            }
+        }
         token = strtok(NULL, " ");
     }
 }
 
-void tweet::printWords() {
+void Tweet::printWords() {
     for (int i = 0; i < words.getSize(); i++) {
          cout << words[i] << endl;;
     }

@@ -8,6 +8,7 @@
 #include <iostream>
 #include <fstream>
 #include "tweet.h"
+#include "classifier.h"
 
 using namespace std;
 
@@ -26,18 +27,23 @@ int main(int argc, char* const argv[])
     }
 
 
-
-    ifstream trainData("dev-train-data.csv");
-    ifstream trainPosOrNeg("dev-train-target.csv");
+    ifstream trainData(argv[1]);
+    ifstream trainPosOrNeg(argv[2]);
+//    ifstream testData(argv[3]);
+//    ifstream testPosOrNeg(argv[4]);
+    ofstream output(argv[3]);
 
     string buffer;
-    string buffer1;
     getline(trainData, buffer); //gets the formatting row
     getline(trainPosOrNeg, buffer); //gets the formatting row
     int idNum;
     int rating;
-    DSVector <tweet> tweets;
-    for (int i = 0; i < 100; i++) {
+    trainData.clear();
+    trainData.seekg(0, ios::beg);
+    trainPosOrNeg.clear();
+    trainPosOrNeg.seekg(0, ios::beg);
+    DSVector <Tweet> tweets;
+    for (int i = 0; i < 10000; i++) {
         getline(trainData, buffer, ','); //gets row number
         getline(trainData, buffer, ','); //gets idNumber
         idNum = stringToInt(buffer);
@@ -48,14 +54,15 @@ int main(int argc, char* const argv[])
         getline(trainPosOrNeg, buffer, ','); //gets rating
         rating = stringToInt(buffer);
         getline(trainPosOrNeg, buffer);
-        tweet tweet1(idNum, rating, text);
+        Tweet tweet1(idNum, rating, text);
         tweets.push_back(tweet1);
     }
-    for (int i = 0; i < tweets.getSize(); i ++) {
-        if (tweets[i].getRating() == 4) {
-            tweets[i].printWords();
-        }
-    }
+//    for (int i = 0; i < tweets.getSize(); i ++) {
+//        if (tweets[i].getRating() == 4) {
+//            tweets[i].printWords();
+//        }
+//    }
+    Classifier classify(tweets);
 }
 
 int stringToInt(string s) {

@@ -4,7 +4,7 @@
 #include "tweet.h"
 
 TEST_CASE("DSVector class", "[DSVector]") {
-    tweet tweet1(1,1, DSString(""));
+    Tweet tweet1(1,1, DSString(""));
 
     DSVector<int> test;
     DSVector<int> vTest (3);
