@@ -62,6 +62,9 @@ TEST_CASE("DSString class", "[DSString]") {
     REQUIRE(vTest[5] == "SMU");
     REQUIRE(vTest[6] == "SMU");
 
+    int numSMU = vTest.countDuplicate("SMU");
+    REQUIRE(numSMU == 4);
+
     vTest1.pop_back();
     vTest1.pop_back();
     vTest1.pop_back();

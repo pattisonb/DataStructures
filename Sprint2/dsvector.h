@@ -30,6 +30,7 @@ class DSVector {
         void push_back(const T&);
         void pop_back();
         bool isEmpty();
+        int countDuplicate(const T&);
         void print();
 };
 
@@ -140,6 +141,17 @@ bool DSVector<T>::isEmpty() {
             return true;
         }
     return false;
+}
+
+template <typename T>
+int DSVector<T>::countDuplicate(const T& ele) {
+    int count = 0;
+    for (int i = 0; i < length; i++) {
+        if (ele == arr[i]) {
+            count++;
+        }
+    }
+    return count;
 }
 
 template <typename T>

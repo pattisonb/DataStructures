@@ -61,7 +61,8 @@ void Tweet::createWords() { //separates tweet into a vector of individual words
 }
 
 void Tweet::printWords() {
+    DSString ouput = "";
     for (int i = 0; i < words.getSize(); i++) {
-         cout << words[i] << endl;;
-    }
+        cout << words[i] << endl;
+   }
 }
