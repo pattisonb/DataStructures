@@ -15,7 +15,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-        ../../../Desktop/CSE2341-F19-Brian-Pattison/Sprint2/main.cpp \
         dsstring.cpp \
         dsvectortest.cpp \
         main.cpp \
@@ -32,11 +31,10 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     ../../../Desktop/CSE2341-F19-Brian-Pattison/Sprint2/dsvector.h \
+    ../../../Downloads/catch.hpp \
     catch.hpp \
-    catch2.h \
     dsstring.h \
     dsvector.h \
     tweet.h
-    catch2.h
     dsstring.h
     tweet.h
