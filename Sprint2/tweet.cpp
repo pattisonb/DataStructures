@@ -34,19 +34,29 @@ void Tweet::createWords() { //separates tweet into a vector of individual words
     char* token = strtok(contents.c_str(), " ");
     while (token != NULL) {
         if (token[0] != '@') {
-            for (int i = 0; token[i]; i++) {
-                if (!isalpha(token[i])) {
-                    for (int j = i; token[j]; j++) {
-                        token[j] = token[j + 1];
+            for (int l = 0; l < 5; l++) {
+                for (int i = 0; token[i]; i++) {
+                    if (!isalpha(token[i])) {
+                        for (int j = i; token[j]; j++) {
+                            token[j] = token[j + 1];
+                        }
                     }
+                    token[i] = tolower(token[i]);
                 }
-                token[i] = tolower(token[i]);
             }
             string toStem = token;
             Porter2Stemmer::stem(toStem);
             DSString temp(toStem);
             if (temp.size() != 0 && token[0] != '@') {
-                words.push_back(temp);
+                for (int i = 0; i < 98; i++) {
+                    if (temp == stops[i]) {
+                        break;
+                    }
+                    else {
+                      words.push_back(temp);
+                      i = 98;
+                    }
+                }
             }
         }
         token = strtok(NULL, " ");
