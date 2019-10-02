@@ -44,20 +44,17 @@ void Tweet::createWords() { //separates tweet into a vector of individual words
                     token[i] = tolower(token[i]);
                 }
             }
+        }
             string toStem = token;
             Porter2Stemmer::stem(toStem);
             DSString temp(toStem);
             if (temp.size() != 0 && token[0] != '@') {
-                for (int i = 0; i < 98; i++) {
-                    if (temp == stops[i]) {
-                        break;
-                    }
-                    else {
                       words.push_back(temp);
-                      i = 98;
-                    }
-                }
             }
+            for (int i = 0; i < 98; i++) {
+                if (stops[i] == temp) {
+                    words.pop_back();
+                }
         }
         token = strtok(NULL, " ");
     }

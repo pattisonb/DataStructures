@@ -43,7 +43,7 @@ int main(int argc, char* const argv[])
     trainPosOrNeg.clear();
     trainPosOrNeg.seekg(0, ios::beg);
     DSVector <Tweet> tweets;
-    for (int i = 0; i < 100; i++) {
+    for (int i = 0; i < 100000; i++) {
         getline(trainData, buffer, ','); //gets row number
         getline(trainData, buffer, ','); //gets idNumber
         idNum = stringToInt(buffer);
