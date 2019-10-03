@@ -90,7 +90,7 @@ int main(int argc, char* const argv[])
     }
     double accuracy = numCorrect/total;
     output << setprecision(3);
-    output << accuracy << endl;
+    output << accuracy << endl; //outputting accuracy at the start of the file
     for (int i = 0; i < testTweets.getSize(); i++) {
         returnedRating = classify.Classify(testTweets[i]);
         output << testTweets[i].getID() << ",";
