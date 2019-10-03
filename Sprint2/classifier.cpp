@@ -15,7 +15,7 @@ int Classifier::Classify(Tweet tweet) {
     int total = 0;
     for (int i = 0; i < tweet.words.getSize(); i++) {
         if (NegativeWords.countDuplicate(tweet.words[i]) == 1) {
-            total -= 1;
+            total -= 3;
         }
         else if (veryNegativeWords.countDuplicate(tweet.words[i]) == 1) {
             total -= 6;
@@ -24,10 +24,10 @@ int Classifier::Classify(Tweet tweet) {
             total -= 10;
         }
         if (PositiveWords.countDuplicate(tweet.words[i]) == 1) {
-            total += 1;
+            total += 3;
         }
         else if (veryPositiveWords.countDuplicate(tweet.words[i]) == 1) {
-            total += 3;
+            total += 6;
         }
         else if (veryVeryPositiveWords.countDuplicate(tweet.words[i]) == 1) {
             total += 10;
@@ -101,7 +101,7 @@ void Classifier::populateWordVectors() {
                 veryVeryPositiveWords.push_back(allPositiveWords[i]);
             }
         }
-        else if (count >= 10) {
+        else if (count >= 14) {
             int count2 = veryPositiveWords.countDuplicate(allPositiveWords[i]);
             if (count2 < 1) {
                 veryPositiveWords.push_back(allPositiveWords[i]);
@@ -122,7 +122,7 @@ void Classifier::populateWordVectors() {
                 veryVeryNegativeWords.push_back(allNegativeWords[i]);
             }
         }
-        else if (count >= 10) {
+        else if (count >= 14) {
             int count2 = veryNegativeWords.countDuplicate(allNegativeWords[i]);
             if (count2 < 1) {
                 veryNegativeWords.push_back(allNegativeWords[i]);
