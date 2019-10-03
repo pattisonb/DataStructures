@@ -101,7 +101,7 @@ void Classifier::populateWordVectors() {
                 veryVeryPositiveWords.push_back(allPositiveWords[i]);
             }
         }
-        else if (count >= 14) {
+        else if (count >= 12) {
             int count2 = veryPositiveWords.countDuplicate(allPositiveWords[i]);
             if (count2 < 1) {
                 veryPositiveWords.push_back(allPositiveWords[i]);
@@ -122,7 +122,7 @@ void Classifier::populateWordVectors() {
                 veryVeryNegativeWords.push_back(allNegativeWords[i]);
             }
         }
-        else if (count >= 14) {
+        else if (count >= 12) {
             int count2 = veryNegativeWords.countDuplicate(allNegativeWords[i]);
             if (count2 < 1) {
                 veryNegativeWords.push_back(allNegativeWords[i]);
