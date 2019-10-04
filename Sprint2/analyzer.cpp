@@ -93,12 +93,16 @@ int main(int argc, char* const argv[])
     output << accuracy << endl; //outputting accuracy at the start of the file
     for (int i = 0; i < testTweets.getSize(); i++) {
         returnedRating = classify.Classify(testTweets[i]);
-        output << testTweets[i].getID() << ",";
         if (returnedRating == testTweets[i].getRating()) {
+            output << testTweets[i].getID() << ",";
             output << "c" << endl;
         }
-        else {
-          output << "i" << endl;
+    }
+    for (int i = 0; i < testTweets.getSize(); i++) {
+        returnedRating = classify.Classify(testTweets[i]);
+        if (returnedRating != testTweets[i].getRating()) {
+            output << testTweets[i].getID() << ",";
+            output << "i" << endl;
         }
     }
 }
