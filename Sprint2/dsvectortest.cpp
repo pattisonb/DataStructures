@@ -36,6 +36,37 @@ TEST_CASE("DSVector class", "[DSVector]") {
     vTest1.pop_back();
 
     REQUIRE(vTest1.isEmpty() == true);
+
+    DSVector<bool> test2;
+    DSVector<bool> vTest2 (3);
+    vTest2[0] = true;
+    vTest2[1] = false;
+    vTest2[2] = true;
+
+    DSVector<bool> vTest3;
+    vTest3 = vTest2;
+
+    REQUIRE(vTest2[0] == true);
+    REQUIRE(vTest3[0] == true);
+    REQUIRE(vTest3[1] == false);
+
+    REQUIRE(vTest3[2] == true);
+
+    vTest2.push_back(false);
+    vTest2.push_back(false);
+    vTest2.push_back(false);
+    vTest2.push_back(false);
+
+    REQUIRE(vTest2[3] == false);
+    REQUIRE(vTest2[4] == false);
+    REQUIRE(vTest2[5] == false);
+    REQUIRE(vTest2[6] == false);
+
+    vTest3.pop_back();
+    vTest3.pop_back();
+    vTest3.pop_back();
+
+    REQUIRE(vTest1.isEmpty() == true);
 }
 
 TEST_CASE("DSString class", "[DSString]") {

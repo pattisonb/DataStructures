@@ -95,7 +95,7 @@ bool DSVector<T>::operator== (const DSVector<T>& a) {
 }
 
 template <typename T>
-T& DSVector<T>::operator[] (const int a) { //error check
+T& DSVector<T>::operator[] (const int a) {
     return arr[a];
 }
 
