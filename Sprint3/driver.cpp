@@ -19,7 +19,7 @@ int main()
    vector <string> alphabetPrint;
 
    // [0] = Quick Sort, [1] = Selection Sort, [2] = Insertion Sort, [3] = Bubble Sort, [4] = Merge Sort
-   int times [5];
+   int times [5]; //stores times for each run
 
    exp[0] = new MysterySorterA<int>;
    exp[1] = new MysterySorterB<int>;
@@ -53,7 +53,7 @@ int main()
    }
 
    swap(exp[addressOfSmallestTime(times, 5)], exp[4]);
-   swap(print[addressOfSmallestTime(times, 5)], print[4]);
+   swap(print[addressOfSmallestTime(times, 5)], print[4]); //moving quicksort to the back so it won't be in the next step
    alphabetPrint.push_back(print[4] + "QuickSort");
    //now only test the 4 unknown vectors
 
