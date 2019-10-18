@@ -34,7 +34,7 @@ int main()
    int b = rand() % 100;
 
    vector<int> data;
-   for (int i = 0; i < 100; i++) {
+   for (int i = 0; i < 1000; i++) {
        data.push_back(b);
        b = rand() % 100;
    }
@@ -53,7 +53,7 @@ int main()
    }
 
    swap(exp[addressOfSmallestTime(times, 5)], exp[4]);
-   swap(print[addressOfSmallestTime(times, 5)], print[4]); //moving quicksort to the back so it won't be in the next step
+   swap(print[addressOfSmallestTime(times, 5)], print[4]); //moving insertion to the back so it won't be in the next step
    alphabetPrint.push_back(print[4] + "QuickSort");
    //now only test the 4 unknown vectors
 
