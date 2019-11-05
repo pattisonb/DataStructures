@@ -7,6 +7,7 @@ template <class T>
 class ListNode {
    template <class U> friend class LinkedList;
     template <class U> friend class Iterator;
+    friend class AdjList;
 
 private:
    ListNode* next;
@@ -14,7 +15,9 @@ private:
    T data;
 
 public:
-   ListNode(T x = 0, ListNode* n = nullptr, ListNode* p = nullptr) : data(x), next(n), previous(p) {}
+   ListNode() : next(nullptr), previous(nullptr) {}
+   ListNode(T val) : next(nullptr), previous(nullptr), data(val){}
+   ListNode(const ListNode<T>& d) : data(d.data), next(nullptr), previous(nullptr) {}
 };
 
 
@@ -23,10 +26,10 @@ class Iterator {
    template <class U> friend class LinkedList;
 
 private:
-   ListNode<T>* pointer;
    ListNode<T>* end;
 
 public:
+      ListNode<T>* pointer;
    Iterator(ListNode<T>* ptr = nullptr, ListNode<T>* last = nullptr) : pointer(ptr), end(last) {}
    //derefence the iterator
    T& operator*() {return pointer->data; }

@@ -56,14 +56,3 @@ TEST_CASE("Stack class", "[DSStack]") {
     test.pop();
     REQUIRE(test.isEmpty() == true);
 }
-
-TEST_CASE("AdjancencyList class", "[AdjList]") {
-    int element[4] = {1, 2, 3, 4};
-    LinkedList<int> test(element[0]);
-    LinkedList<int> test2(element[1]);
-    LinkedList<int> test3(element[2]);
-
-    AdjList<int> one(1, test);
-
-    REQUIRE(one.getLinkedList(1)->getSize() == test.getSize());
-}
