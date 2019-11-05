@@ -17,5 +17,6 @@ int main(int argc, char* const argv[])
             return runCatchTests(argc, argv);
     }
     DSString flightData = argv[1];
-    FlightPlanner fightPlanner(flightData);
+    DSString requestedFlight = argv[2];
+    FlightPlanner fightPlanner(flightData, requestedFlight);
 }

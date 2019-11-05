@@ -1,10 +1,12 @@
 #include "flightplanner.h"
 
-FlightPlanner::FlightPlanner(DSString a)
+FlightPlanner::FlightPlanner(DSString a, DSString c)
 {
     flightDataInput = a;
+    requestedFlight = c;
     ifstream flightData(flightDataInput.c_str());
-    cout << "check" << endl;
+    ifstream reqFlight(requestedFlight.c_str());
+    //cout << "check" << endl;
     char b[100];
     flightData.getline(b, 100);
     int numFlights;
@@ -16,16 +18,12 @@ FlightPlanner::FlightPlanner(DSString a)
         destinationCity tempDest2;
         OriginCity tempOrig2;
         flightData.getline(b, 100, '|');
-        DSString originCity1 = b;
-        if (!flightMap.contains(b)) {
-            tempOrig.setName(b);
-        }
+        DSString originCity1(b);
+        tempOrig.setName(b);
         tempDest.setName(b);
-        DSString originCity2 = b;
         flightData.getline(b, 100, '|');
-        if (!flightMap.contains(b)) {
-            tempOrig2.setName(b);
-        }
+        DSString originCity2 = b;
+        tempOrig2.setName(b);
         tempDest2.setName(b);
         flightData.getline(b, 100, '|');
         double cost = stod(b);
@@ -40,17 +38,36 @@ FlightPlanner::FlightPlanner(DSString a)
         tempDest2.setAirline(b);
         if (flightMap.contains(originCity1)) {
             flightMap.getDestinations(originCity1)->insertAtEnd(tempDest);
+                                    //cout << "check" << endl;
         }
         else{
             flightMap.add(tempOrig);
             flightMap.getDestinations(originCity1)->insertAtEnd(tempDest);
+                                    //cout << "check" << endl;
         }
         if (flightMap.contains(originCity2)) {
             flightMap.getDestinations(originCity2)->insertAtEnd(tempDest2);
+                                    //cout << "check" << endl;
         }
         else{
             flightMap.add(tempOrig2);
             flightMap.getDestinations(originCity2)->insertAtEnd(tempDest2);
+                                    //cout << "check" << endl;
         }
     }
+    reqFlight.getline(b, 100);
+    numFlights = atoi(b);
+    for (int i = 0; i < numFlights; i++) {
+        reqFlight.getline(b, 100, '|');
+        DSString oCity(b);
+        reqFlight.getline(b, 100, '|');
+        DSString dCity(b);
+        Flight flight(oCity, dCity);
+    }
+}
+
+void FlightPlanner::findFlights(Flight f, AdjList list) {
+    LinkedList<destinationCity>::iterator itr;
+
+
 }

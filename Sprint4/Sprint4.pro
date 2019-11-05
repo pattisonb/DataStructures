@@ -7,9 +7,11 @@ SOURCES += \
         adjlist.cpp \
         destinationcity.cpp \
         dsstring.cpp \
+        flight.cpp \
         flightplanner.cpp \
         main.cpp \
         origincity.cpp \
+        path.cpp \
         tester.cpp
 
 HEADERS += \
@@ -19,6 +21,8 @@ HEADERS += \
     dsstack.h \
     dsstring.h \
     dsvector.h \
+    flight.h \
     flightplanner.h \
     linkedlist.h \
-    origincity.h
+    origincity.h \
+    path.h

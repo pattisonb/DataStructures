@@ -2,7 +2,7 @@
 #define ORIGINCITY_H
 #include "dsstring.h"
 #include "destinationcity.h"
-#include "linkedlist.h"""
+#include "linkedlist.h"
 
 
 class OriginCity

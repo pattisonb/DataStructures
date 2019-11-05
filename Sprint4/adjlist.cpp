@@ -10,6 +10,7 @@ AdjList::AdjList(LinkedList<OriginCity> l) {
 }
 
 void AdjList::add(OriginCity city){
+    ++size;
     flights.insertAtEnd(city);
 }
 
@@ -35,4 +36,8 @@ bool AdjList::contains(DSString name) {
         itr++;
     }
     return false;
+}
+
+int AdjList::getSize() {
+    return size;
 }

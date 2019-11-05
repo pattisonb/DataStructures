@@ -8,11 +8,13 @@ class AdjList
 {
 private:
    LinkedList<OriginCity> flights;
+   int size = 0;
 public:
    AdjList();
    AdjList(LinkedList<OriginCity> flights);
    void add(OriginCity);
    LinkedList<destinationCity>* getDestinations(DSString);
    bool contains(DSString);
+   int getSize();
 };
 #endif // ADJLIST_H
