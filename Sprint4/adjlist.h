@@ -4,6 +4,11 @@
 #include "origincity.h"
 #include "destinationcity.h"
 #include "dsstring.h"
+#include "dsvector.h"
+#include "flight.h"
+#include "path.h"
+#include "dsstack.h"
+
 class AdjList
 {
 private:
@@ -16,5 +21,6 @@ public:
    LinkedList<destinationCity>* getDestinations(DSString);
    bool contains(DSString);
    int getSize();
+   void getFlights(Flight&);
 };
 #endif // ADJLIST_H

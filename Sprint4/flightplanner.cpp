@@ -57,17 +57,13 @@ FlightPlanner::FlightPlanner(DSString a, DSString c)
     }
     reqFlight.getline(b, 100);
     numFlights = atoi(b);
-    for (int i = 0; i < numFlights; i++) {
+    for (int i = 0; i < 1; i++) {
         reqFlight.getline(b, 100, '|');
         DSString oCity(b);
         reqFlight.getline(b, 100, '|');
         DSString dCity(b);
-        Flight flight(oCity, dCity);
+        Flight newFlight(oCity, dCity);
+        flightMap.getFlights(newFlight);
+        newFlight.printFlight();
     }
-}
-
-void FlightPlanner::findFlights(Flight f, AdjList list) {
-    LinkedList<destinationCity>::iterator itr;
-
-
 }

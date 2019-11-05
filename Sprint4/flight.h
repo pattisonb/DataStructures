@@ -11,10 +11,14 @@ private:
     DSString destinationCity;
     DSVector<Path> paths;
 public:
+    Flight();
     Flight(DSString, DSString);
     void setOrigin(DSString);
     void setDest(DSString);
+    DSString getOrigin();
+    DSString getDest();
     void addPath(Path);
+    void printFlight();
 };
 
 #endif // FLIGHT_H

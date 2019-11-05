@@ -41,3 +41,32 @@ bool AdjList::contains(DSString name) {
 int AdjList::getSize() {
     return size;
 }
+
+void AdjList::getFlights(Flight& f) {
+    LinkedList<destinationCity>::iterator dest;
+    DSStack<destinationCity> dests;
+    DSVector<DSString> cities;
+    DSString origCity = f.getOrigin();
+    DSString destCity = f.getDest();
+    cities.push_back(origCity);
+    //trying with one flight
+    dest = getDestinations(origCity)->begin();
+    dests.push(dest.pointer->data);
+    cities.push_back(dest.pointer->data.getName());
+    dest = getDestinations(dest.pointer->data.getName())->begin();
+    dest++;
+    while (!(dest.pointer->data.getName() == destCity)) {
+        if (cities.countDuplicate(dest.pointer->data.getName()) > 0) {
+            dest++;
+        }
+        dests.push(dest.pointer->data);
+        cities.push_back(dest.pointer->data.getName());
+        dest++;
+    }
+    DSVector<destinationCity> visitedCities;
+    while (!dests.isEmpty()) {
+        visitedCities.push_back(dests.pop());
+    }
+    Path path(visitedCities);
+    f.addPath(path);
+}

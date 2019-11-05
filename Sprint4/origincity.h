@@ -14,6 +14,7 @@ private:
 public:
     OriginCity();
     OriginCity(DSString, LinkedList<destinationCity>*);
+    ~OriginCity();
     DSString getName();
     void addDestination(destinationCity);
     void setName(DSString);

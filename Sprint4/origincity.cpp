@@ -11,6 +11,10 @@ OriginCity::OriginCity(DSString n, LinkedList<destinationCity>* d) {
     destinations = d;
 }
 
+OriginCity::~OriginCity() {
+    destinations->clear();
+}
+
 DSString OriginCity::getName() {
     return name;
 }
