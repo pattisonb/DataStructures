@@ -18,9 +18,10 @@ public:
    AdjList();
    AdjList(LinkedList<OriginCity> flights);
    void add(OriginCity);
-   LinkedList<destinationCity>* getDestinations(DSString);
+   LinkedList<destinationCity*>* getDestinations(DSString);
    bool contains(DSString);
    int getSize();
    void getFlights(Flight&);
+   OriginCity getOriginCity(DSString);
 };
 #endif // ADJLIST_H

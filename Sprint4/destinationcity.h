@@ -11,6 +11,7 @@ private:
     double time;
 public:
     destinationCity();
+    destinationCity(const destinationCity&);
     destinationCity(DSString, DSString, double, double);
     DSString getName();
     DSString getAirline();

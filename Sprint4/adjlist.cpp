@@ -14,7 +14,7 @@ void AdjList::add(OriginCity city){
     flights.insertAtEnd(city);
 }
 
-LinkedList<destinationCity>* AdjList::getDestinations(DSString cityName) {
+LinkedList<destinationCity*>* AdjList::getDestinations(DSString cityName) {
     LinkedList<OriginCity>::iterator itr;
     itr = flights.begin();
     while(itr.pointer != nullptr) {
@@ -42,31 +42,43 @@ int AdjList::getSize() {
     return size;
 }
 
+OriginCity AdjList::getOriginCity(DSString cityName) {
+    LinkedList<OriginCity>::iterator itr;
+    itr = flights.begin();
+    while(itr.pointer != nullptr) {
+        if(itr.pointer->data.getName() == cityName) {
+            return itr.pointer->data;
+        }
+        itr++;
+    }
+}
+
 void AdjList::getFlights(Flight& f) {
-    LinkedList<destinationCity>::iterator dest;
-    DSStack<destinationCity> dests;
+    LinkedList<destinationCity*>::iterator d;
+    DSStack<destinationCity*> destinations;
     DSVector<DSString> cities;
     DSString origCity = f.getOrigin();
     DSString destCity = f.getDest();
     cities.push_back(origCity);
-    //trying with one flight
-    dest = getDestinations(origCity)->begin();
-    dests.push(dest.pointer->data);
-    cities.push_back(dest.pointer->data.getName());
-    dest = getDestinations(dest.pointer->data.getName())->begin();
-    dest++;
-    while (!(dest.pointer->data.getName() == destCity)) {
-        if (cities.countDuplicate(dest.pointer->data.getName()) > 0) {
-            dest++;
+    d = getDestinations(origCity)->begin();
+    while (cities.getSize() > 0) {
+        if (destinations.peek()->getName() == destCity) {
+            f.addPath(destinations);
+            destinations.pop();
+            cities.pop_back();
         }
-        dests.push(dest.pointer->data);
-        cities.push_back(dest.pointer->data.getName());
-        dest++;
+        else {
+            if (d.pointer->data == nullptr) {
+
+            }
+            if (cities.countDuplicate(d.pointer->data->getName()) > 0) {
+                d++;
+            }
+            else {
+               cities.push_back(d.pointer->data->getName());
+               destinations.push(d.pointer->data);
+               d++;
+            }
+        }
     }
-    DSVector<destinationCity> visitedCities;
-    while (!dests.isEmpty()) {
-        visitedCities.push_back(dests.pop());
-    }
-    Path path(visitedCities);
-    f.addPath(path);
 }

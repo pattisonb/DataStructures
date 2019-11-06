@@ -10,13 +10,15 @@ class OriginCity
     friend class AdjList;
 private:
     DSString name;
-    LinkedList<destinationCity>* destinations;
+    LinkedList<destinationCity*>* destinations;
 public:
+    int index = 0;
     OriginCity();
-    OriginCity(DSString, LinkedList<destinationCity>*);
+    OriginCity(const OriginCity&);
+    OriginCity(DSString, LinkedList<destinationCity*>*);
     ~OriginCity();
     DSString getName();
-    void addDestination(destinationCity);
+    void addDestination(destinationCity*);
     void setName(DSString);
 };
 

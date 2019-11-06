@@ -5,12 +5,14 @@
 
 class Path
 {
+    friend class Flight;
 private:
     DSVector<destinationCity> cities;
     double cost = 0;
     double time = 0;
 public:
     Path();
+    Path(const Path&);
     Path(DSVector<destinationCity>);
 };
 

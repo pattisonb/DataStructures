@@ -13,56 +13,62 @@ FlightPlanner::FlightPlanner(DSString a, DSString c)
     numFlights = stoi(b);
     AdjList flightMap;
     for (int i = 0; i < numFlights; i++) {
-        destinationCity tempDest;
-        OriginCity tempOrig;
-        destinationCity tempDest2;
-        OriginCity tempOrig2;
+        destinationCity* tempDest = new destinationCity;
+        OriginCity* tempOrig = new OriginCity;
+        destinationCity* tempDest2 = new destinationCity; //add to heap
+        OriginCity* tempOrig2 = new OriginCity;
         flightData.getline(b, 100, '|');
         DSString originCity1(b);
-        tempOrig.setName(b);
-        tempDest.setName(b);
+        tempOrig->setName(b);
+        tempDest->setName(b);
         flightData.getline(b, 100, '|');
         DSString originCity2 = b;
-        tempOrig2.setName(b);
-        tempDest2.setName(b);
+        tempOrig2->setName(b);
+        tempDest2->setName(b);
         flightData.getline(b, 100, '|');
         double cost = stod(b);
-        tempDest.setPrice(cost);
-        tempDest2.setPrice(cost);
+        tempDest->setPrice(cost);
+        tempDest2->setPrice(cost);
         flightData.getline(b, 100, '|');
         double time = stod(b);
-        tempDest.setTime(time);
-        tempDest2.setTime(time);
+        tempDest->setTime(time);
+        tempDest2->setTime(time);
         flightData.getline(b, 100);
-        tempDest.setAirline(b);
-        tempDest2.setAirline(b);
+        tempDest->setAirline(b);
+        tempDest2->setAirline(b);
         if (flightMap.contains(originCity1)) {
-            flightMap.getDestinations(originCity1)->insertAtEnd(tempDest);
+            flightMap.getDestinations(originCity1)->insertAtEnd(tempDest2);
                                     //cout << "check" << endl;
         }
         else{
-            flightMap.add(tempOrig);
-            flightMap.getDestinations(originCity1)->insertAtEnd(tempDest);
+            flightMap.add(*tempOrig);
+            flightMap.getDestinations(originCity1)->insertAtEnd(tempDest2);
                                     //cout << "check" << endl;
         }
         if (flightMap.contains(originCity2)) {
-            flightMap.getDestinations(originCity2)->insertAtEnd(tempDest2);
+            flightMap.getDestinations(originCity2)->insertAtEnd(tempDest);
                                     //cout << "check" << endl;
         }
         else{
-            flightMap.add(tempOrig2);
-            flightMap.getDestinations(originCity2)->insertAtEnd(tempDest2);
+            flightMap.add(*tempOrig2);
+            flightMap.getDestinations(originCity2)->insertAtEnd(tempDest);
                                     //cout << "check" << endl;
         }
     }
     reqFlight.getline(b, 100);
     numFlights = atoi(b);
-    for (int i = 0; i < 1; i++) {
+    Flight newFlight;
+    for (int i = 0; i < numFlights; i++) {
         reqFlight.getline(b, 100, '|');
         DSString oCity(b);
+        newFlight.setOrigin(b);
         reqFlight.getline(b, 100, '|');
+        newFlight.setDest(b);
         DSString dCity(b);
-        Flight newFlight(oCity, dCity);
+        reqFlight.getline(b, 100);
+//        newFlight.setDest(dCity);
+//        newFlight.setOrigin(oCity);
+        newFlight.clearPaths();
         flightMap.getFlights(newFlight);
         newFlight.printFlight();
     }

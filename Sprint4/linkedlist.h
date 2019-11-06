@@ -7,6 +7,7 @@ template <class T>
 class ListNode {
    template <class U> friend class LinkedList;
     template <class U> friend class Iterator;
+    friend class OriginCity;
     friend class AdjList;
 
 private:
@@ -94,7 +95,7 @@ public:
    T peekFront();
 
    void insertAtFront(T&);
-   void insertAtEnd(T&);
+   void insertAtEnd(T);
    void deleteFront();
    void deleteBack();
 
@@ -213,9 +214,9 @@ void LinkedList<T>::insertAtFront(T &data) {
 }
 
 template <class T>
-void LinkedList<T>::insertAtEnd(T &data) {
+void LinkedList<T>::insertAtEnd(T data) {
     ListNode<T>* newNode = new ListNode<T>(data);
-    if (size == 0) { //if list is empty
+    if (front == nullptr) { //if list is empty
         front = back = newNode;
     }
 

@@ -3,12 +3,14 @@
 #include "dsstring.h"
 #include "dsvector.h"
 #include "path.h"
+#include "dsstack.h"
+#include "destinationcity.h"
 
 class Flight
 {
 private:
     DSString originCity;
-    DSString destinationCity;
+    DSString destCity;
     DSVector<Path> paths;
 public:
     Flight();
@@ -19,6 +21,8 @@ public:
     DSString getDest();
     void addPath(Path);
     void printFlight();
+    void clearPaths();
+    void addPath(DSStack<destinationCity*>);
 };
 
 #endif // FLIGHT_H

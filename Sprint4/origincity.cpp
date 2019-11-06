@@ -3,10 +3,15 @@
 OriginCity::OriginCity()
 {
    name = "";
-   destinations = new LinkedList<destinationCity>();
+   destinations = new LinkedList<destinationCity*>();
 }
 
-OriginCity::OriginCity(DSString n, LinkedList<destinationCity>* d) {
+OriginCity::OriginCity(const OriginCity& d) {
+    name = d.name;
+    destinations = d.destinations;
+}
+
+OriginCity::OriginCity(DSString n, LinkedList<destinationCity*>* d) {
     name = n;
     destinations = d;
 }
@@ -19,7 +24,7 @@ DSString OriginCity::getName() {
     return name;
 }
 
-void OriginCity::addDestination(destinationCity newDest) {
+void OriginCity::addDestination(destinationCity* newDest) {
     destinations->insertAtEnd(newDest);
 }
 

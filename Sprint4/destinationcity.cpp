@@ -6,6 +6,13 @@ destinationCity::destinationCity() {
     time = 0;
 }
 
+destinationCity::destinationCity(const destinationCity& d) {
+    name = d.name;
+    airline = d.airline;
+    cost = d.cost;
+    time = d.time;
+}
+
 destinationCity::destinationCity(DSString n, DSString a, double c, double t) {
     name = n;
     airline = a;
