@@ -1,11 +1,13 @@
 #include "flightplanner.h"
 
-FlightPlanner::FlightPlanner(DSString a, DSString c)
+FlightPlanner::FlightPlanner(DSString a, DSString c, DSString p)
 {
     flightDataInput = a;
     requestedFlight = c;
+    print = p;
     ifstream flightData(flightDataInput.c_str());
     ifstream reqFlight(requestedFlight.c_str());
+    ofstream output(print.c_str());
     //cout << "check" << endl;
     char b[100];
     flightData.getline(b, 100);
@@ -59,6 +61,7 @@ FlightPlanner::FlightPlanner(DSString a, DSString c)
     numFlights = atoi(b);
     Flight newFlight;
     for (int i = 0; i < numFlights; i++) {
+        totalFlights++;
         reqFlight.getline(b, 100, '|');
         DSString oCity(b);
         newFlight.setOrigin(b);
@@ -66,10 +69,49 @@ FlightPlanner::FlightPlanner(DSString a, DSString c)
         newFlight.setDest(b);
         DSString dCity(b);
         reqFlight.getline(b, 100);
+        newFlight.setCostOrTime(b);
 //        newFlight.setDest(dCity);
 //        newFlight.setOrigin(oCity);
         newFlight.clearPaths();
         flightMap.getFlights(newFlight);
-        newFlight.printFlight();
+        if (newFlight.costOrTime == "T" || newFlight.costOrTime == "t") {
+            newFlight.sortTime();
+        }
+        else {
+            newFlight.sortTime();
+        }
+        //newFlight.checkPaths();
+        printFlight(newFlight, output);
+    }
+}
+
+void FlightPlanner::printFlight(Flight &f, ofstream& print) {
+    print << "Flight " << totalFlights << ": " << f.originCity << ", " << f.destCity;
+    if (f.costOrTime == "T" || f.costOrTime == "t") {
+        print << " (Time)" << endl;
+    }
+    else {
+        print << " (Cost)" << endl;
+    }
+    print << endl;
+    if (f.numPaths < 3) {
+        for (int x = 0; x < f.numPaths; x++) {
+            print << "Path " << x + 1 << ": " << f.originCity;
+                for (int j = f.paths[x].cities.getSize() - 1; j >= 0; j--) {
+                    print << " -> " << f.paths[x].cities[j].getName() << " (" << f.paths[x].cities[j].getAirline() << ")";
+                }
+                print << "\nTime: " << f.paths[x].time << " Cost: " << f.paths[x].cost << endl;
+        }
+        print << endl;
+    }
+    else {
+        for (int x = 0; x < 3; x++) {
+            print << "Path " << x + 1 << ": " << f.originCity;
+                for (int j = f.paths[x].cities.getSize() - 1; j >= 0; j--) {
+                    print << " -> " << f.paths[x].cities[j].getName() << " (" << f.paths[x].cities[j].getAirline() << ")";
+                }
+                print << "\nTime: " << f.paths[x].time << " Cost: " << f.paths[x].cost << endl;
+        }
+        print << endl;
     }
 }

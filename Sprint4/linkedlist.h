@@ -25,7 +25,7 @@ public:
 template <class T>
 class Iterator {
    template <class U> friend class LinkedList;
-
+friend class AdjList;
 private:
    ListNode<T>* end;
 

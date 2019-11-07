@@ -20,6 +20,8 @@ public:
     DSString getName();
     void addDestination(destinationCity*);
     void setName(DSString);
+    int getSize();
+    bool isExhausted();
 };
 
 #endif // ORIGINCITY_H

@@ -21,7 +21,10 @@ public:
    LinkedList<destinationCity*>* getDestinations(DSString);
    bool contains(DSString);
    int getSize();
+   void getFirstFlight(Flight&);
    void getFlights(Flight&);
-   OriginCity getOriginCity(DSString);
+   int getOriginCityIndex(DSString);
+   bool isExhausted(DSString);
+
 };
 #endif // ADJLIST_H

@@ -12,6 +12,14 @@ void Flight::setOrigin(DSString o) {
 void Flight::setDest(DSString d) {
     destCity = d;
 }
+
+void Flight::setCostOrTime(DSString t) {
+    costOrTime = t;
+}
+
+void Flight::setNumPaths(int t) {
+    numPaths = t;
+}
 void Flight::addPath(Path p) {
     paths.push_back(p);
 }
@@ -40,9 +48,51 @@ void Flight::clearPaths(){
 }
 
 void Flight::addPath(DSStack<destinationCity*> d) {
+    ++numPaths;
     DSVector<destinationCity> v;
     while(!(d.isEmpty())) {
         v.push_back(*d.pop());
     }
     paths.push_back(Path(v));
+}
+
+void Flight::sortTime() {
+   int i, j, min_idx;
+   int n = paths.getSize();
+   for (i = 0; i < n - 1; i++) {
+       min_idx = i;
+       for ( j = i+1; j < n; j++) {
+           if (paths[j].time < paths[min_idx].time) {
+               min_idx = j;
+               swap(&paths[min_idx], &paths[i]);
+           }
+       }
+   }
+}
+
+void Flight::sortCost() {
+    int i, j, min_idx;
+    int n = paths.getSize();
+    for (i = 0; i < n - 1; i++) {
+        min_idx = i;
+        for ( j = i+1; j < n; j++) {
+            if (paths[j].cost < paths[min_idx].cost) {
+                min_idx = j;
+                swap(&paths[min_idx], &paths[i]);
+            }
+        }
+    }
+}
+
+void Flight::swap (Path* xp, Path* yp) {
+    Path temp = *xp;
+    *xp = *yp;
+    *yp = temp;
+}
+
+void Flight::checkPaths() {
+    for (int i = 0; i < paths.getSize(); i++) {
+        cout << paths[i].cities.peek().getName() << endl;
+        cout << numPaths << endl;
+    }
 }

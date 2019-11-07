@@ -10,6 +10,8 @@ private:
     double cost;
     double time;
 public:
+    bool isVisited = false;
+    int timesVisited = 0;
     destinationCity();
     destinationCity(const destinationCity&);
     destinationCity(DSString, DSString, double, double);

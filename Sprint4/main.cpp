@@ -18,5 +18,6 @@ int main(int argc, char* const argv[])
     }
     DSString flightData = argv[1];
     DSString requestedFlight = argv[2];
-    FlightPlanner fightPlanner(flightData, requestedFlight);
+    DSString output = argv[3];
+    FlightPlanner fightPlanner(flightData, requestedFlight, output);
 }

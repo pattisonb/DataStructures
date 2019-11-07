@@ -14,9 +14,12 @@ class FlightPlanner
 private:
     DSString flightDataInput;
     DSString requestedFlight;
+    DSString print;
+    int totalFlights = 0;
 public:
-    FlightPlanner(DSString, DSString);
+    FlightPlanner(DSString, DSString, DSString p);
     void findFlights(Flight, AdjList);
+    void printFlight(Flight&, ofstream&);
 };
 
 #endif // FLIGHTPLANNER_H

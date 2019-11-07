@@ -32,6 +32,7 @@ class DSVector {
         bool isEmpty();
         int countDuplicate(const T&);
         void print();
+        T peek();
 };
 
 template <typename T>
@@ -159,5 +160,10 @@ void DSVector<T>::print() {
     for (int i = 0; i < length; i++) {
         cout << arr[i] << endl;
     }
+}
+
+template <typename T>
+T DSVector<T>::peek() {
+    return arr[0];
 }
 #endif // DSVECTOR_H

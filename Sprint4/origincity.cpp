@@ -31,3 +31,18 @@ void OriginCity::addDestination(destinationCity* newDest) {
 void OriginCity::setName(DSString n) {
     name = n;
 }
+
+int OriginCity::getSize() {
+    return destinations->getSize();
+}
+
+bool OriginCity::isExhausted() {
+    LinkedList<destinationCity*>::iterator d;
+    d = destinations->begin();
+    while (d.pointer != nullptr) {
+        if (d.pointer->data->isVisited == false) {
+            return false;
+        }
+    }
+    return true;
+}

@@ -6,6 +6,7 @@
 class Path
 {
     friend class Flight;
+    friend class FlightPlanner;
 private:
     DSVector<destinationCity> cities;
     double cost = 0;
