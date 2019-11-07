@@ -19,7 +19,7 @@ private:
 public:
     FlightPlanner(DSString, DSString, DSString p);
     void findFlights(Flight, AdjList);
-    void printFlight(Flight&, ofstream&);
+    void printFlight(Flight*, ofstream&);
 };
 
 #endif // FLIGHTPLANNER_H

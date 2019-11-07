@@ -20,7 +20,7 @@ void Flight::setCostOrTime(DSString t) {
 void Flight::setNumPaths(int t) {
     numPaths = t;
 }
-void Flight::addPath(Path p) {
+void Flight::addPath(Path& p) {
     paths.push_back(p);
 }
 DSString Flight::getOrigin() {

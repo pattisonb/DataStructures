@@ -51,3 +51,19 @@ void destinationCity::setTime(double t) {
 void destinationCity::setAirline(DSString n) {
     airline = n;
 }
+
+bool destinationCity::operator != (const destinationCity& d) {
+    if (this->cost == d.cost) {
+        return false;
+    }
+    if (this->time == d.time) {
+        return false;
+    }
+    if (this->airline == d.airline) {
+        return false;
+    }
+    if (this->name == d.name) {
+        return false;
+    }
+    return true;
+}

@@ -53,24 +53,37 @@ int AdjList::getOriginCityIndex(DSString cityName) {
     }
 }
 
-bool AdjList::isExhausted(DSString o) {
+void AdjList::reset() {
+    LinkedList<OriginCity>::iterator itr;
+    itr = flights.begin();
+    LinkedList<destinationCity*>::iterator d;
+    while (itr.pointer != nullptr) {
+        d = getDestinations(itr.pointer->data.getName())->begin();
+        while (d.pointer != nullptr) {
+            d.pointer->data->isVisited = false;
+            d.pointer->data->timesVisited = 0;
+            d++;
+        }
+        itr++;
+    }
+}
+
+void AdjList::resetIterator(DSString o) {
     LinkedList<destinationCity*>::iterator d;
     d = getDestinations(o)->begin();
     while (d.pointer != nullptr) {
-        if (d.pointer->data->isVisited == true) {
-            return true;
-        }
+        d.pointer->data->isVisited = false;
+        d.pointer->data->timesVisited = 0;
         d++;
     }
-    return false;
 }
 
-void AdjList::getFirstFlight(Flight& f) {
+void AdjList::getFirstFlight(Flight* f) {
     LinkedList<destinationCity*>::iterator d;
     DSStack<destinationCity*> destinations;
     DSVector<DSString> cities;
-    DSString origCity = f.getOrigin();
-    DSString destCity = f.getDest();
+    DSString origCity = f->getOrigin();
+    DSString destCity = f->getDest();
     cities.push_back(origCity);
     //trying with one flight
     d = getDestinations(origCity)->begin();
@@ -86,7 +99,7 @@ void AdjList::getFirstFlight(Flight& f) {
     }
     destinations.push(d.pointer->data);
     cities.push_back(d.pointer->data->getName());
-    f.addPath(destinations);
+    f->addPath(destinations);
     while(!destinations.isEmpty()) {
         destinations.pop();
     }
@@ -95,26 +108,49 @@ void AdjList::getFirstFlight(Flight& f) {
     }
 }
 
-void AdjList::getFlights(Flight &f) {
+void AdjList::getFlights(Flight*& f) {
+    reset();
     LinkedList<destinationCity*>::iterator d;
     DSStack<destinationCity*> destinations;
     DSVector<DSString> cities;
-    DSString origCity = f.getOrigin();
-    DSString destCity = f.getDest();
-    f.setNumPaths(0);
+    DSString origCity = f->getOrigin();
+    DSString destCity = f->getDest();
+    f->setNumPaths(0);
     d = getDestinations(origCity)->begin();
     cities.push_back(origCity);
     bool go = true;
-    while (go) {
-        while (d.pointer->data->isVisited == true) {
-            d++;
+    while (go == true) {
+        if ((d.pointer) == nullptr) {
+            go = false;
+            break;
+        }
+        if (d.pointer != nullptr) {
+            while (d.pointer->data->isVisited == true && go == true) {
+                if (d.pointer->next != nullptr) {
+                    d++;
+                }
+                else {
+                    d = getDestinations(d.pointer->data->getName())->begin();
+                    cities.pop_back();
+                }
+                if (cities.isEmpty()) {
+                    go = false;
+                    break;
+                }
+            }
         }
         destinations.push(d.pointer->data);
         cities.push_back(d.pointer->data->getName());
         d.pointer->data->isVisited = true;
+        if (getDestinations(origCity)->getSize() < 3 && d.pointer->data->timesVisited < 10) {
+            d.pointer->data->isVisited = false;
+        }
         if (d.pointer->data->getName() == destCity) {
-            f.addPath(destinations);
-            if (d.pointer->data->timesVisited <= 15) {
+            cout << f->paths.countDuplicate(Path(destinations)) << endl;
+            if (f->paths.countDuplicate(Path(destinations)) == 0) {
+                f->addPath(destinations);
+            }
+            if (d.pointer->data->timesVisited < 5) {
                 d.pointer->data->isVisited = false;
             }
             d.pointer->data->timesVisited += 1;
@@ -129,7 +165,9 @@ void AdjList::getFlights(Flight &f) {
         else {
             if (d.pointer == nullptr) {
                 d = getDestinations(destinations.pop()->getName())->begin();
+                resetIterator(cities.peek());
                 cities.pop_back();
+                resetIterator(cities.peek());
                 while (d.pointer->data->isVisited == true) {
                     d++;
                 }
@@ -144,8 +182,5 @@ void AdjList::getFlights(Flight &f) {
                 d = getDestinations(destinations.peek()->getName())->begin();
             }
         }
-    }
-    if (isExhausted(origCity)) {
-        go = false;
     }
 }

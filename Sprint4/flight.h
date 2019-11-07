@@ -10,12 +10,13 @@
 class Flight
 {
     friend class FlightPlanner;
+    friend class AdjList;
 private:
     DSString originCity;
     DSString destCity;
     DSVector<Path> paths;
     DSString costOrTime = "";
-    int numPaths = 1;
+    int numPaths;
 public:
     Flight();
     Flight(DSString, DSString);
@@ -25,7 +26,7 @@ public:
     void setNumPaths(int);
     DSString getOrigin();
     DSString getDest();
-    void addPath(Path);
+    void addPath(Path&);
     void printFlight();
     void clearPaths();
     void addPath(DSStack<destinationCity*>);

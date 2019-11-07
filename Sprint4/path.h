@@ -2,6 +2,7 @@
 #define PATH_H
 #include "destinationcity.h"
 #include "dsvector.h"
+#include "dsstack.h"
 
 class Path
 {
@@ -14,7 +15,10 @@ private:
 public:
     Path();
     Path(const Path&);
+    Path(DSStack<destinationCity*>);
     Path(DSVector<destinationCity>);
+    bool operator== (const Path&);
+    void printPath();
 };
 
 #endif // PATH_H

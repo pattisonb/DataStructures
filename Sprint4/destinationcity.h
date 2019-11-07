@@ -23,6 +23,7 @@ public:
     void setPrice(double);
     void setTime(double);
     void setAirline(DSString);
+    bool operator != (const destinationCity&);
 };
 
 #endif // DESTINATIONCITY_H
