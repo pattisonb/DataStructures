@@ -144,9 +144,10 @@ void AdjList::getFlights(Flight*& f) {
         d.pointer->data->isVisited = true;
         if (getDestinations(origCity)->getSize() < 3 && d.pointer->data->timesVisited < 10) {
             d.pointer->data->isVisited = false;
+            resetIterator(cities.peek());
         }
         if (d.pointer->data->getName() == destCity) {
-            cout << f->paths.countDuplicate(Path(destinations)) << endl;
+            //cout << f->paths.countDuplicate(Path(destinations)) << endl;
             if (f->paths.countDuplicate(Path(destinations)) == 0) {
                 f->addPath(destinations);
             }
@@ -167,7 +168,6 @@ void AdjList::getFlights(Flight*& f) {
                 d = getDestinations(destinations.pop()->getName())->begin();
                 resetIterator(cities.peek());
                 cities.pop_back();
-                resetIterator(cities.peek());
                 while (d.pointer->data->isVisited == true) {
                     d++;
                 }
